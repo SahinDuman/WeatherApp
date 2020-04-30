@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from "react";
 import "./App.css";
-import LocationTempView from './components/LocationTempView';
+import LocationView from './components/LocationView';
 
 function App() {
   const [weather, setWeather] = useState(null);
   const apiKey = process.env.REACT_APP_RAPID_API_KEY;
 
-  const Stockholm = {
+  const locations = [
+    {
+    city: 'Stockholm',
+    country: 'Sweden',
     lat: 59.334591,
     long: 18.063240
   }
+]
 
   useEffect(() => {
     
@@ -28,12 +32,12 @@ function App() {
       setWeather(data);
     }
 
-    fetchData(Stockholm.lat, Stockholm.long)
+    fetchData(locations[0].lat, locations[0].long)
    }, [])
 
   return(
-    <div className="App">
-       {weather ? <LocationTempView data={weather} />  : ''}
+    <div className="app">
+       {weather ? <LocationView data={weather} />  : ''}
     </div>
   )
 }
