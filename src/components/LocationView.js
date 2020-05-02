@@ -2,6 +2,7 @@ import React from "react";
 import WeatherDetailsListITem from "./WeatherDetailsListITem";
 import SideScrollingContainer from "./SideScrollingContainer";
 import Icon from "../Icons";
+import WeatherDetailsContainer from "./WeatherDetailsContainer";
 
 function LocationView(props) {
   const current = props.data.currently;
@@ -71,47 +72,13 @@ function LocationView(props) {
             <p>{weatherData.currentDate}</p>
           </div>
 
-          <div className="location-weather__container standard-shadow">
-            <div className="location-weather__main">
-              <div>
-                <span className="temperature-label">Temperature</span>
-                <p className="temperature">
-                  {weatherData.currentTemp}
-                  <span className="primary-color__text">{"\u00b0"}</span>C
-                </p>
-              </div>
-              <div className="icon-container">
-                <span className="icon">
-                  <Icon name={weatherData.currentIcon} width="50px" />
-                </span>
-                <span className="icon-label">{weatherData.currentSummary}</span>
-              </div>
-            </div>
-
-            <ul className="location-weather__list-container">
-              <WeatherDetailsListITem
-                title="Humidity"
-                value={weatherData.currentHumidity}
-              />
-              <WeatherDetailsListITem
-                title="Wind Speed"
-                value={weatherData.currentWindspeed}
-              />
-              <WeatherDetailsListITem
-                title="UV Index"
-                value={weatherData.uvIndex}
-              />
-              <WeatherDetailsListITem
-                title="Visibility"
-                value={weatherData.visibility}
-              />
-            </ul>
-          </div>
+        <WeatherDetailsContainer data={weatherData} />
           <div className="sub-header">
             <p>Weekly forecast</p>
           </div>
 
           <SideScrollingContainer
+            setPopupData={props.setPopupData} setPopup={props.setPopup}
             days={days}
             forecast={props.data.daily.data}
           />

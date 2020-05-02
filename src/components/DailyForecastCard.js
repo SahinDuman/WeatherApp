@@ -9,10 +9,20 @@ function DailyForecastCard(props) {
     tempLow: Math.round(data.temperatureMin),
     day: props.days[date.getDay()].substring(0, 3),
     icon: data.icon,
+    humidity: Math.round(data.humidity * 100) + "%",
+    uvIndex: data.uvIndex,
+    windSpeed: data.windSpeed  + 'km/h',
+    visibility: Math.round(data.visibility)
   };
-  console.log(props.data);
+
+  const CardOnClick = (data) => {
+    console.log('CLICK', data)
+     props.setPopupData(weatherData);
+    props.setPopup('dailyForecast'); 
+  }
+
   return (
-    <div className="daily-forecast__container">
+    <div onClick={() => CardOnClick(data)} className="daily-forecast__container">
       <p className="day">{weatherData.day}</p>
       <div className="daily-forecast__card standard-shadow">
         <div className="icon">

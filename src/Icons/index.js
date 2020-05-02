@@ -40,7 +40,7 @@ const Icon = props => {
     case "arrow":
       return <ArrowDown {...props} />;
     default:
-      return;
+      return 'REEE';
   }
 };
 
