@@ -7,7 +7,7 @@ function DailyForecastCard(props) {
   const weatherData = {
     tempHigh: Math.round(data.temperatureMax),
     tempLow: Math.round(data.temperatureMin),
-    day: props.days[date.getDay()].substring(0, 3),
+    day: props.days[date.getDay()],
     icon: data.icon,
     humidity: Math.round(data.humidity * 100) + "%",
     uvIndex: data.uvIndex,
@@ -23,7 +23,7 @@ function DailyForecastCard(props) {
 
   return (
     <div onClick={() => CardOnClick(data)} className="daily-forecast__container">
-      <p className="day">{weatherData.day}</p>
+      <p className="day">{weatherData.day.substring(0, 3)}</p>
       <div className="daily-forecast__card standard-shadow">
         <div className="icon">
           <Icon name={weatherData.icon} width="40px" />

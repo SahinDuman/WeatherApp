@@ -10,26 +10,26 @@ function WeatherDetailsContainer(props) {
         <div>
           <span className="temperature-label">Temperature</span>
           <p className="temperature">
-            {weatherData.currentTemp}
+            {weatherData.temp}
             <span className="primary-color__text">{"\u00b0"}</span>C
           </p>
         </div>
         <div className="icon-container">
           <span className="icon">
-            <Icon name={weatherData.currentIcon} width="50px" />
+            <Icon name={weatherData.icon} width="50px" />
           </span>
-          <span className="icon-label">{weatherData.currentSummary}</span>
+          <span className="icon-label">{weatherData.summary}</span>
         </div>
       </div>
 
       <ul className="location-weather__list-container">
         <WeatherDetailsListITem
           title="Humidity"
-          value={weatherData.currentHumidity}
+          value={weatherData.humidity}
         />
         <WeatherDetailsListITem
           title="Wind Speed"
-          value={weatherData.currentWindspeed}
+          value={weatherData.windSpeed}
         />
         <WeatherDetailsListITem title="UV Index" value={weatherData.uvIndex} />
         <WeatherDetailsListITem

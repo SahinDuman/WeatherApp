@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import LocationView from "./components/LocationView";
+import LocationView from "./views/LocationView";
+import Home from './views/Home';
 import Popup from "./components/Popup";
 
 function App() {
+  const locationKey = process.env.REACT_APP_LOCATION_ACCESS_TOKEN;
   const apiKey = process.env.REACT_APP_RAPID_API_KEY;
 
   const [weather, setWeather] = useState(null);
-  const [popup, setPopup] = useState(null);
+  const [popup, setPopup] = useState('addLocation');
   const [popupData, setPopupData] = useState(null);
-  console.log('POPUP 2');
+
+  let popupRender = "";
 
   const locations = [
     {
@@ -20,29 +23,28 @@ function App() {
     },
   ];
 
+  const fetchWeather = async (lat, long) => {
+    const url = `https://dark-sky.p.rapidapi.com/${lat},${long}?lang=en&units=auto`;
+  
+    const data = await fetch(url, {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "dark-sky.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }).then((res) => res.json());
+    console.log("fetch data", data);
+    setWeather([data]);
+  };
+  
+
+
   useEffect(() => {
-    console.log('POPUP 3');
-    const fetchData = async (lat, long) => {
-      const url = `https://dark-sky.p.rapidapi.com/${lat},${long}?lang=en&units=auto`;
+    fetchWeather(locations[0].lat, locations[0].long);
+  }, []);
 
-      const data = await fetch(url, {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "dark-sky.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }).then((res) => res.json());
-      console.log("fetch data", data);
-      setWeather(data);
-    };
-
-    fetchData(locations[0].lat, locations[0].long);
-  }, [0]);
-
-  let popupRender = "";
 
   if (popup) {
-    console.log('POPUP 1');
     document.querySelector("body").classList.add("prevent-scroll");
     popupRender = <Popup type={popup} setPopupData={setPopupData} setPopup={setPopup} data={popupData}/>;
   } else {
@@ -51,11 +53,13 @@ function App() {
 
   return (
     <div className="app">
-      {weather ? <LocationView setPopupData={setPopupData} setPopup={setPopup} data={weather} /> : ""}
+      <Home weather={weather}/>
       {popupRender}
     </div>
   );
 }
+
+//<LocationView setPopupData={setPopupData} setPopup={setPopup} data={weather} />
 
 /*
 const fetchWeather = (lat, long) => {

@@ -12,10 +12,21 @@
 html, body {
   font-family: 'Noto Sans JP', sans-serif;
   height: 100%;
+  -ms-overflow-style: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background-color: var(--main-bg-color);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+input:focus, button:focus{
+  outline: none;
 }
 
 p {
@@ -23,6 +34,76 @@ p {
   padding: 0;
 }
 
+/* HOME VIEW*/
+
+.header {
+  display: flex;
+  justify-content: center;
+  opacity: 0.7;
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.weather-card__list-container {
+  margin: 0 5%;
+}
+
+.weather-card {
+  margin: 2em auto 0;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #fff;
+  padding:2em 0;
+  width: 100%;
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+.weather-card div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.weather-card div:nth-child(2) {
+  align-items: flex-end;
+}
+
+.weather-card div:nth-child(1) {
+  align-items: center;
+}
+
+
+.weather-card .icon-label {
+  margin-top: 2em;
+  padding: 0 1em;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.weather-card__location-tag {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 2em 0 0 2em;
+  text-align: right;
+  font-weight: 400;
+;
+}
+
+.weather-card__location-tag p {
+  display: flex;
+  padding: 0.2em 1em 0 0;
+}
+
+.weather-card__location-tag span {
+  padding: 2px 0.5em 0 1em;
+}
+
+.weather-card .temperature {
+  font-size: 2em;
+  padding: 0 0.5em;
+}
 
 /* LOCATION VIEW */
 .location-header {
@@ -50,7 +131,7 @@ p {
   border-radius: 2em 0 0 2em;
   text-align: right;
   -webkit-box-shadow: 0 4px 10px 3px rgba(0,0,0,0.06); 
-  box-shadow: 0 4px 10px 3px rgba(162, 64, 207, 0.5);
+  box-shadow: 0 4px 20px 3px rgba(162, 64, 207, 0.5);
   font-weight: 400;
 }
 
@@ -64,8 +145,8 @@ p {
 }
 
 .location-weather__container {
+  position: relative;
   width: 90%;
-  overflow-x: scroll;
   margin: 2em auto 0;
   background-color: #fff;
   border-radius: 10px;
@@ -131,9 +212,9 @@ p {
 /* DAILY FORECAST CARD*/
 
 .daily-forecast__container{
-  box-sizing: ;
   min-width: 200px !important;
   margin: 0 1em 0 0;
+  cursor: pointer;
 }
 
 
@@ -195,7 +276,93 @@ p {
   transition: all 0.1s;
 }
 
+.popup-container__close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 70%);
+  cursor: pointer;
+}
 
+.popup-container__close-btn .close {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+.popup-header p {
+  padding-left: 0.5em;
+}
+
+/*add location popup*/
+
+.add-location__container {
+  position: relative;
+  width: 90%;
+  background-color: #fff;
+  margin: 3em auto 0;
+  border-radius: 10px;
+}
+
+
+/*input*/
+
+.input-container {
+  padding: 1em;
+}
+
+.input-container button {
+  margin: 1em 0 2em;
+}
+
+.input-container input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1em 1em;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-bg-color);
+  border: 2px solid rgba(0,0,0,0.2);
+}
+
+.input-container input:focus {
+  border-color: var(--primary-color);
+}
+
+
+/*BUTTON*/
+.primary-btn {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 0.7em 1em;
+  width: 100%;
+  border-radius: 5px;
+} 
+
+.primary-btn:hover {
+  background-color: #9139b9;
+}
+
+.primary-btn:focus {
+  background-color: #9139b9;
+}
+
+.primary-btn:active {
+  background-color: #712d91;
+}
 /* MISC STYLES */
 .primary-color__text {
   color: var(--primary-color);
@@ -203,6 +370,7 @@ p {
 
 .sub-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 90%;
   margin: 2em auto 0;
@@ -230,11 +398,23 @@ p {
   margin-top: 0.5em;
 }
 
+.padding__05em {
+  padding: 0.5em;
+}
+
+.padding-y__05em {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 .text-center {
   text-align: center;
 }
 
-
 .prevent-scroll {
   overflow: hidden;
+}
+
+.border-bottom__discrete {
+  border-bottom: 1px solid rgba(0,0,0,0.2);
 }

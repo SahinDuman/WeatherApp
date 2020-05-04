@@ -1,6 +1,7 @@
 import React from "react";
 
 import ArrowDown from "./Orion_angle-down";
+import Close from "./Orion_delete-circle";
 import Clouds from "./Orion_clouds";
 import Cloudy from "./Orion_cloudy";
 import Rain from "./Orion_drizzle";
@@ -11,7 +12,7 @@ import Location from "./Orion_pin";
 import Sleet from "./Orion_sleet";
 import Sunny from "./Orion_sunny";
 import Moon from "./Orion_sunset";
-import Windy from "./Orion_windstorm";
+import Windy from "./Orion_windstorm";       
 
 const Icon = props => {
   switch (props.name) {
@@ -39,6 +40,8 @@ const Icon = props => {
       return <Location {...props} />;
     case "arrow":
       return <ArrowDown {...props} />;
+    case "close":
+      return <Close {...props} />;
     default:
       return 'REEE';
   }

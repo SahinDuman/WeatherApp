@@ -1,8 +1,8 @@
 import React from "react";
-import WeatherDetailsListITem from "./WeatherDetailsListITem";
-import SideScrollingContainer from "./SideScrollingContainer";
+import WeatherDetailsListITem from "../components/WeatherDetailsListITem";
+import SideScrollingContainer from "../components/SideScrollingContainer";
 import Icon from "../Icons";
-import WeatherDetailsContainer from "./WeatherDetailsContainer";
+import WeatherDetailsContainer from "../components/WeatherDetailsContainer";
 
 function LocationView(props) {
   const current = props.data.currently;
@@ -33,17 +33,17 @@ function LocationView(props) {
 
   const weatherData = {
     city: props.data.timezone.split("/")[1],
-    /* currentTemp: Math.round(current.temperature, 10).toFixed(1), WITH ONE DECIMAL */
-    currentTemp: Math.round(current.temperature, 10),
-    currentIcon: current.icon,
-    currentSummary:
+    /* temp: Math.round(current.temperature, 10).toFixed(1), WITH ONE DECIMAL */
+    temp: Math.round(current.temperature, 10),
+    icon: current.icon,
+    summary:
       current.summary.length > 20
         ? current.summary.substring(0, 20) + "..."
         : current.summary,
-    currentHumidity: Math.round(current.humidity * 100) + "%",
-    currentWindspeed: current.windSpeed + "km/h",
-    currentDate: `${date.getDate()} - ${months[date.getMonth()]}`,
-    currentDay: days[date.getDay()],
+    humidity: Math.round(current.humidity * 100) + "%",
+    windSpeed: current.windSpeed + "km/h",
+    date: `${date.getDate()} - ${months[date.getMonth()]}`,
+    day: days[date.getDay()],
     uvIndex: current.uvIndex,
     visibility: Math.round(current.visibility),
   };
@@ -68,8 +68,8 @@ function LocationView(props) {
             </div>
           </div>
           <div className="sub-header">
-            <p>{weatherData.currentDay}</p>
-            <p>{weatherData.currentDate}</p>
+            <p>{weatherData.day}</p>
+            <p>{weatherData.date}</p>
           </div>
 
         <WeatherDetailsContainer data={weatherData} />
